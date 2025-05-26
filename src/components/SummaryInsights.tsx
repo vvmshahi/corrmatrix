@@ -67,7 +67,7 @@ const SummaryInsights = ({ correlationMatrix, columns }: SummaryInsightsProps) =
               <span className="font-semibold text-gray-900">Strongest Positive</span>
             </div>
             <p className="text-sm text-gray-600">
-              No strong positive correlations found (> 0.8)
+              No strong positive correlations found ({"> 0.8"})
             </p>
           </div>
         )}
@@ -94,7 +94,7 @@ const SummaryInsights = ({ correlationMatrix, columns }: SummaryInsightsProps) =
               <span className="font-semibold text-gray-900">Strongest Negative</span>
             </div>
             <p className="text-sm text-gray-600">
-              No strong negative correlations found (< -0.5)
+              No strong negative correlations found ({"< -0.5"})
             </p>
           </div>
         )}
@@ -107,7 +107,7 @@ const SummaryInsights = ({ correlationMatrix, columns }: SummaryInsightsProps) =
               <span className="font-semibold text-gray-900">Multicollinearity Alert</span>
             </div>
             <p className="text-sm text-gray-600 mb-3">
-              High correlation detected (> 0.9). Consider removing one feature:
+              High correlation detected ({"> 0.9"}). Consider removing one feature:
             </p>
             <div className="space-y-2">
               {multicollinear.slice(0, 3).map((pair, idx) => (
@@ -129,7 +129,7 @@ const SummaryInsights = ({ correlationMatrix, columns }: SummaryInsightsProps) =
               <span className="font-semibold text-gray-900">Multicollinearity</span>
             </div>
             <p className="text-sm text-gray-600">
-              No multicollinearity issues detected (all correlations < 0.9)
+              No multicollinearity issues detected (all correlations {"< 0.9"})
             </p>
           </div>
         )}
