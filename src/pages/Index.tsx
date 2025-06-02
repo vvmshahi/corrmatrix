@@ -1,11 +1,11 @@
-
 import { useState } from "react";
 import CSVUpload from "@/components/CSVUpload";
 import CorrelationHeatmap from "@/components/CorrelationHeatmap";
 import SummaryInsights from "@/components/SummaryInsights";
 import MethodToggle from "@/components/MethodToggle";
 import { useToast } from "@/hooks/use-toast";
-import { TrendingUp, BarChart3, Database } from "lucide-react";
+import { TrendingUp, BarChart3, Database, Github, Linkedin, Sparkles, Zap, Target } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export interface DataPoint {
   [key: string]: number | string;
@@ -102,120 +102,206 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 font-ibm">
-      {/* Header */}
-      <div className="bg-white border-b border-slate-200/70 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-3 rounded-xl shadow-lg">
-                <BarChart3 className="h-8 w-8 text-white" />
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="bg-gradient-to-r from-orange-500 to-red-400 p-2.5 rounded-xl shadow-lg">
+                <BarChart3 className="h-6 w-6 text-white" />
               </div>
-              <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
                 CorrMatrix
-              </h1>
-            </div>
-            <h2 className="text-xl lg:text-2xl font-medium text-slate-600 mb-4">
-              Visual Correlation Studio
-            </h2>
-            <p className="text-lg text-slate-500 leading-relaxed max-w-3xl mx-auto">
-              Upload your dataset and instantly visualize feature relationships through interactive correlation heatmaps. 
-              Make informed decisions about feature selection with enterprise-grade statistical insights.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Features Banner */}
-      {data.length === 0 && (
-        <div className="bg-gradient-to-r from-indigo-50 via-white to-purple-50 border-b border-slate-200/50">
-          <div className="max-w-7xl mx-auto px-6 py-12">
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center shadow-lg">
-                  <Database className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-slate-800 mb-2">Smart Upload</h3>
-                <p className="text-slate-600">Automatically detects numeric columns and handles missing data</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-4 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center shadow-lg">
-                  <TrendingUp className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-slate-800 mb-2">Advanced Analytics</h3>
-                <p className="text-slate-600">Pearson & Spearman correlations with multicollinearity detection</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center shadow-lg">
-                  <BarChart3 className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-slate-800 mb-2">Interactive Visualization</h3>
-                <p className="text-slate-600">Dynamic heatmaps with hover insights and export capabilities</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {data.length === 0 ? (
-          <div className="max-w-2xl mx-auto">
-            <CSVUpload onDataUpload={handleDataUpload} />
-          </div>
-        ) : (
-          <div className="space-y-8">
-            <div className="max-w-2xl mx-auto">
-              <MethodToggle method={method} onMethodChange={handleMethodChange} />
+              </span>
             </div>
             
-            <div className="grid xl:grid-cols-4 gap-8">
-              <div className="xl:col-span-3">
-                <CorrelationHeatmap
-                  correlationMatrix={correlationMatrix}
-                  columns={numericColumns}
-                  method={method}
-                />
+            <nav className="hidden md:flex items-center gap-8">
+              <a href="#" className="text-slate-600 hover:text-orange-500 font-medium transition-colors">Home</a>
+              <a href="#" className="text-slate-600 hover:text-orange-500 font-medium transition-colors">About</a>
+              <a 
+                href="https://github.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-600 hover:text-orange-500 font-medium transition-colors flex items-center gap-1"
+              >
+                <Github className="h-4 w-4" />
+                GitHub
+              </a>
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-600 hover:text-orange-500 font-medium transition-colors flex items-center gap-1"
+              >
+                <Linkedin className="h-4 w-4" />
+                LinkedIn
+              </a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-white via-orange-50/30 to-red-50/30">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(249,115,22,0.1),transparent_50%)]"></div>
+        <div className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <Sparkles className="h-6 w-6 text-orange-500" />
+              <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider">AI Intelligence Suite</span>
+            </div>
+            
+            <h1 className="text-5xl lg:text-7xl font-bold mb-8">
+              <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
+                Data Correlation
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-orange-500 via-red-400 to-orange-600 bg-clip-text text-transparent">
+                Intelligence
+              </span>
+            </h1>
+            
+            <p className="text-xl lg:text-2xl text-slate-600 mb-12 leading-relaxed max-w-3xl mx-auto">
+              Transform your datasets into actionable insights with AI-powered correlation analysis. 
+              Discover hidden patterns, eliminate redundant features, and accelerate your machine learning pipeline.
+            </p>
+            
+            {data.length === 0 && (
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-orange-500 to-red-400 hover:from-orange-600 hover:to-red-500 text-white font-semibold px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                onClick={() => document.querySelector('input[type="file"]')?.click()}
+              >
+                <Zap className="h-5 w-5 mr-2" />
+                Get Started - Upload CSV
+              </Button>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section - Only show when no data */}
+      {data.length === 0 && (
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
+                How It Works
+              </h2>
+              <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+                Three simple steps to unlock your data's potential
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center group">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl w-20 h-20 mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Database className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Smart Upload</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Upload your CSV and our AI automatically detects numeric columns and handles missing data with intelligent preprocessing.
+                </p>
               </div>
               
-              <div className="xl:col-span-1">
-                <SummaryInsights
-                  correlationMatrix={correlationMatrix}
-                  columns={numericColumns}
-                />
+              <div className="text-center group">
+                <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-6 rounded-2xl w-20 h-20 mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <TrendingUp className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Advanced Analytics</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Choose between Pearson and Spearman correlation methods with automatic multicollinearity detection and feature recommendations.
+                </p>
+              </div>
+              
+              <div className="text-center group">
+                <div className="bg-gradient-to-br from-orange-500 to-red-400 p-6 rounded-2xl w-20 h-20 mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Target className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Actionable Insights</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Get interactive visualizations and AI-powered recommendations to optimize your feature selection and model performance.
+                </p>
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </section>
+      )}
+
+      {/* Main Content */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          {data.length === 0 ? (
+            <div className="max-w-2xl mx-auto">
+              <CSVUpload onDataUpload={handleDataUpload} />
+            </div>
+          ) : (
+            <div className="space-y-12 animate-fade-in">
+              <div className="max-w-2xl mx-auto">
+                <MethodToggle method={method} onMethodChange={handleMethodChange} />
+              </div>
+              
+              <div className="grid xl:grid-cols-4 gap-8">
+                <div className="xl:col-span-3">
+                  <CorrelationHeatmap
+                    correlationMatrix={correlationMatrix}
+                    columns={numericColumns}
+                    method={method}
+                  />
+                </div>
+                
+                <div className="xl:col-span-1">
+                  <SummaryInsights
+                    correlationMatrix={correlationMatrix}
+                    columns={numericColumns}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="bg-slate-900 border-t border-slate-800 mt-20">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="bg-gradient-to-r from-indigo-500 to-purple-500 p-2 rounded-lg">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="bg-gradient-to-r from-orange-500 to-red-400 p-2 rounded-lg">
                 <BarChart3 className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-semibold text-white">CorrMatrix</span>
             </div>
-            <p className="text-slate-400 mb-6 max-w-md mx-auto">
-              Empowering data scientists with professional-grade correlation analysis tools
+            
+            <p className="text-slate-400 mb-8 text-lg">
+              Part of the AI Intelligence Suite · Built with AI ❤️ by Shahin
             </p>
-            <div className="flex justify-center items-center space-x-6 text-sm">
-              <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-200 font-medium">
+            
+            <div className="flex justify-center items-center space-x-8 text-sm mb-8">
+              <a 
+                href="https://github.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-orange-400 transition-colors duration-200 font-medium flex items-center gap-2"
+              >
+                <Github className="h-4 w-4" />
                 GitHub
               </a>
               <span className="text-slate-600">•</span>
-              <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-200 font-medium">
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-orange-400 transition-colors duration-200 font-medium flex items-center gap-2"
+              >
+                <Linkedin className="h-4 w-4" />
                 LinkedIn
               </a>
-              <span className="text-slate-600">•</span>
-              <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-200 font-medium">
-                Documentation
-              </a>
             </div>
-            <div className="border-t border-slate-800 mt-8 pt-8 text-slate-500 text-sm">
-              © 2024 CorrMatrix. Built for data professionals who demand excellence.
+            
+            <div className="border-t border-slate-800 pt-8 text-slate-500 text-sm">
+              © 2024 CorrMatrix. Empowering data scientists with next-generation correlation intelligence.
             </div>
           </div>
         </div>

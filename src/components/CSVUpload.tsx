@@ -1,8 +1,7 @@
-
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Upload } from "lucide-react";
+import { Upload, Sparkles, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { DataPoint } from "@/pages/Index";
 
@@ -112,34 +111,49 @@ const CSVUpload = ({ onDataUpload }: CSVUploadProps) => {
 
   return (
     <div className="flex justify-center items-center min-h-[60vh]">
-      <Card className="w-full max-w-md mx-auto">
+      <Card className="w-full max-w-lg mx-auto bg-white rounded-xl border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
         <CardContent className="p-8">
           <div
-            className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+            className={`border-2 border-dashed rounded-xl p-12 text-center transition-all duration-300 ${
               isDragging
-                ? "border-violet-500 bg-violet-50"
-                : "border-gray-300 hover:border-violet-400"
+                ? "border-orange-400 bg-gradient-to-br from-orange-50 to-red-50 scale-105"
+                : "border-slate-300 hover:border-orange-300 hover:bg-orange-50/50"
             }`}
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
           >
-            <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Upload CSV File
+            <div className="flex justify-center mb-6">
+              {isProcessing ? (
+                <div className="bg-gradient-to-r from-orange-500 to-red-400 p-4 rounded-2xl animate-pulse">
+                  <Sparkles className="h-8 w-8 text-white" />
+                </div>
+              ) : (
+                <div className="bg-gradient-to-r from-orange-500 to-red-400 p-4 rounded-2xl shadow-lg">
+                  <Upload className="h-8 w-8 text-white" />
+                </div>
+              )}
+            </div>
+            
+            <h3 className="text-2xl font-bold text-slate-900 mb-3">
+              {isProcessing ? "Processing Your Data..." : "Upload Your Dataset"}
             </h3>
-            <p className="text-gray-600 mb-4 text-sm">
-              Upload a CSV with numeric columns to explore feature relationships.
+            
+            <p className="text-slate-600 mb-6 text-lg leading-relaxed">
+              Drop your CSV file here or click to browse. Our AI will automatically detect numeric features and prepare your correlation analysis.
             </p>
+            
             <Button
               onClick={() => fileInputRef.current?.click()}
-              className="bg-violet-600 hover:bg-violet-700 text-white"
+              className="bg-gradient-to-r from-orange-500 to-red-400 hover:from-orange-600 hover:to-red-500 text-white font-semibold px-8 py-3 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={isProcessing}
             >
+              <FileText className="h-5 w-5 mr-2" />
               {isProcessing ? "Processing..." : "Choose File"}
             </Button>
-            <p className="text-xs text-gray-500 mt-2">
-              Drag and drop is supported
+            
+            <p className="text-sm text-slate-500 mt-4 font-medium">
+              Supports CSV files • Drag & drop enabled • AI-powered detection
             </p>
           </div>
           
