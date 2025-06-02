@@ -5,6 +5,7 @@ import CorrelationHeatmap from "@/components/CorrelationHeatmap";
 import SummaryInsights from "@/components/SummaryInsights";
 import MethodToggle from "@/components/MethodToggle";
 import { useToast } from "@/hooks/use-toast";
+import { TrendingUp, BarChart3, Database } from "lucide-react";
 
 export interface DataPoint {
   [key: string]: number | string;
@@ -101,28 +102,74 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-ibm">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 font-ibm">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            CorrMatrix – Visual Correlation Studio
-          </h1>
-          <p className="text-gray-600">
-            Upload a dataset and instantly visualize the correlation between numeric features using an interactive heatmap.
-          </p>
+      <div className="bg-white border-b border-slate-200/70 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-3 rounded-xl shadow-lg">
+                <BarChart3 className="h-8 w-8 text-white" />
+              </div>
+              <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
+                CorrMatrix
+              </h1>
+            </div>
+            <h2 className="text-xl lg:text-2xl font-medium text-slate-600 mb-4">
+              Visual Correlation Studio
+            </h2>
+            <p className="text-lg text-slate-500 leading-relaxed max-w-3xl mx-auto">
+              Upload your dataset and instantly visualize feature relationships through interactive correlation heatmaps. 
+              Make informed decisions about feature selection with enterprise-grade statistical insights.
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      {/* Features Banner */}
+      {data.length === 0 && (
+        <div className="bg-gradient-to-r from-indigo-50 via-white to-purple-50 border-b border-slate-200/50">
+          <div className="max-w-7xl mx-auto px-6 py-12">
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center shadow-lg">
+                  <Database className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-2">Smart Upload</h3>
+                <p className="text-slate-600">Automatically detects numeric columns and handles missing data</p>
+              </div>
+              <div className="text-center">
+                <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-4 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center shadow-lg">
+                  <TrendingUp className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-2">Advanced Analytics</h3>
+                <p className="text-slate-600">Pearson & Spearman correlations with multicollinearity detection</p>
+              </div>
+              <div className="text-center">
+                <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center shadow-lg">
+                  <BarChart3 className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-2">Interactive Visualization</h3>
+                <p className="text-slate-600">Dynamic heatmaps with hover insights and export capabilities</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="max-w-7xl mx-auto px-6 py-12">
         {data.length === 0 ? (
-          <CSVUpload onDataUpload={handleDataUpload} />
+          <div className="max-w-2xl mx-auto">
+            <CSVUpload onDataUpload={handleDataUpload} />
+          </div>
         ) : (
           <div className="space-y-8">
-            <MethodToggle method={method} onMethodChange={handleMethodChange} />
+            <div className="max-w-2xl mx-auto">
+              <MethodToggle method={method} onMethodChange={handleMethodChange} />
+            </div>
             
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2">
+            <div className="grid xl:grid-cols-4 gap-8">
+              <div className="xl:col-span-3">
                 <CorrelationHeatmap
                   correlationMatrix={correlationMatrix}
                   columns={numericColumns}
@@ -130,7 +177,7 @@ const Index = () => {
                 />
               </div>
               
-              <div className="lg:col-span-1">
+              <div className="xl:col-span-1">
                 <SummaryInsights
                   correlationMatrix={correlationMatrix}
                   columns={numericColumns}
@@ -142,18 +189,33 @@ const Index = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-16">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="text-center text-gray-600">
-            <p className="mb-2">Built by Your Name · Explore More Tools</p>
-            <div className="flex justify-center space-x-4">
-              <a href="#" className="text-violet-600 hover:text-violet-700 transition-colors">
+      <footer className="bg-slate-900 border-t border-slate-800 mt-20">
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="bg-gradient-to-r from-indigo-500 to-purple-500 p-2 rounded-lg">
+                <BarChart3 className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-xl font-semibold text-white">CorrMatrix</span>
+            </div>
+            <p className="text-slate-400 mb-6 max-w-md mx-auto">
+              Empowering data scientists with professional-grade correlation analysis tools
+            </p>
+            <div className="flex justify-center items-center space-x-6 text-sm">
+              <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-200 font-medium">
                 GitHub
               </a>
-              <span>·</span>
-              <a href="#" className="text-violet-600 hover:text-violet-700 transition-colors">
+              <span className="text-slate-600">•</span>
+              <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-200 font-medium">
                 LinkedIn
               </a>
+              <span className="text-slate-600">•</span>
+              <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-200 font-medium">
+                Documentation
+              </a>
+            </div>
+            <div className="border-t border-slate-800 mt-8 pt-8 text-slate-500 text-sm">
+              © 2024 CorrMatrix. Built for data professionals who demand excellence.
             </div>
           </div>
         </div>
