@@ -118,9 +118,16 @@ const Index = () => {
             
             <nav className="hidden md:flex items-center gap-8">
               <a href="#" className="text-slate-600 hover:text-orange-500 font-medium transition-colors">Home</a>
-              <a href="#" className="text-slate-600 hover:text-orange-500 font-medium transition-colors">About</a>
               <a 
-                href="https://github.com" 
+                href="http://www.shahin.studio/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-600 hover:text-orange-500 font-medium transition-colors"
+              >
+                Contact
+              </a>
+              <a 
+                href="https://github.com/vvmshahi" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-600 hover:text-orange-500 font-medium transition-colors flex items-center gap-1"
@@ -129,7 +136,7 @@ const Index = () => {
                 GitHub
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="http://www.linkedin.com/in/vvmshahin" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-600 hover:text-orange-500 font-medium transition-colors flex items-center gap-1"
@@ -277,12 +284,20 @@ const Index = () => {
             </div>
             
             <p className="text-slate-400 mb-10 text-xl font-medium">
-              Part of the AI Intelligence Suite · Built with AI ❤️ by Shahin
+              Part of the AI Intelligence Suite · Created with ❤️ by{' '}
+              <a 
+                href="http://www.shahin.studio/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-orange-400 hover:text-orange-300 transition-colors duration-200"
+              >
+                Shahin
+              </a>
             </p>
             
-            <div className="flex justify-center items-center space-x-10 text-base mb-10">
+            <div className="flex justify-center items-center space-x-10 text-base">
               <a 
-                href="https://github.com" 
+                href="https://github.com/vvmshahi" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-orange-400 transition-colors duration-200 font-medium flex items-center gap-2"
@@ -292,7 +307,7 @@ const Index = () => {
               </a>
               <span className="text-slate-600">•</span>
               <a 
-                href="https://linkedin.com" 
+                href="http://www.linkedin.com/in/vvmshahin" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-orange-400 transition-colors duration-200 font-medium flex items-center gap-2"
@@ -300,10 +315,6 @@ const Index = () => {
                 <Linkedin className="h-5 w-5" />
                 LinkedIn
               </a>
-            </div>
-            
-            <div className="border-t border-slate-800 pt-10 text-slate-500 text-base">
-              © 2024 CorrMatrix. Empowering data scientists with next-generation correlation intelligence.
             </div>
           </div>
         </div>
