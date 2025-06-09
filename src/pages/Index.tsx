@@ -4,7 +4,7 @@ import CorrelationHeatmap from "@/components/CorrelationHeatmap";
 import SummaryInsights from "@/components/SummaryInsights";
 import MethodToggle from "@/components/MethodToggle";
 import { useToast } from "@/hooks/use-toast";
-import { TrendingUp, BarChart3, Database, Github, Linkedin, Sparkles, Zap, Target, Brain, Activity, Layers } from "lucide-react";
+import { TrendingUp, BarChart3, Database, Github, Linkedin, Sparkles, Zap, Target, Brain, Activity, Layers, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface DataPoint {
@@ -18,6 +18,7 @@ const Index = () => {
   const [correlationMatrix, setCorrelationMatrix] = useState<number[][]>([]);
   const [numericColumns, setNumericColumns] = useState<string[]>([]);
   const [method, setMethod] = useState<CorrelationMethod>('pearson');
+  const [showAbout, setShowAbout] = useState(false);
   const { toast } = useToast();
 
   const handleDataUpload = (csvData: DataPoint[], columns: string[]) => {
@@ -103,6 +104,24 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50/20">
+      {/* About Modal */}
+      {showAbout && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-2xl w-full p-8 relative">
+            <button 
+              onClick={() => setShowAbout(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <h2 className="text-3xl font-bold text-slate-900 mb-6">About CorrMatrix</h2>
+            <p className="text-lg text-slate-600 leading-relaxed">
+              CorrMatrix helps you explore relationships between variables through a beautifully generated correlation heatmap. Simply upload your dataset and gain immediate insights into how your features interact — a must-have tool for data scientists, analysts, and machine learning practitioners.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Sticky Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b border-orange-100/50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -118,14 +137,12 @@ const Index = () => {
             
             <nav className="hidden md:flex items-center gap-8">
               <a href="#" className="text-slate-600 hover:text-orange-500 font-medium transition-colors">Home</a>
-              <a 
-                href="http://www.shahin.studio/" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              <button 
+                onClick={() => setShowAbout(true)}
                 className="text-slate-600 hover:text-orange-500 font-medium transition-colors"
               >
-                Contact
-              </a>
+                About
+              </button>
               <a 
                 href="https://github.com/vvmshahi" 
                 target="_blank" 
@@ -136,7 +153,7 @@ const Index = () => {
                 GitHub
               </a>
               <a 
-                href="http://www.linkedin.com/in/vvmshahin" 
+                href="https://www.linkedin.com/in/vvmshahin" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-600 hover:text-orange-500 font-medium transition-colors flex items-center gap-1"
@@ -286,7 +303,7 @@ const Index = () => {
             <p className="text-slate-400 mb-10 text-xl font-medium">
               Part of the AI Intelligence Suite · Created with ❤️ by{' '}
               <a 
-                href="http://www.shahin.studio/" 
+                href="https://www.shahin.studio/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-orange-400 hover:text-orange-300 transition-colors duration-200"
@@ -307,7 +324,7 @@ const Index = () => {
               </a>
               <span className="text-slate-600">•</span>
               <a 
-                href="http://www.linkedin.com/in/vvmshahin" 
+                href="https://www.linkedin.com/in/vvmshahin" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-orange-400 transition-colors duration-200 font-medium flex items-center gap-2"
